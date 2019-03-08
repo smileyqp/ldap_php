@@ -1,15 +1,12 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <!--
-    Modified from the Debian original for Ubuntu
-    Last updated: 2014-03-19
-    See: https://launchpad.net/bugs/1288690
-  -->
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>一清创新科技</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
+</script>
     <style type="text/css" media="screen">
   * {
     margin: 0px 0px 0px 0px;
@@ -31,6 +28,7 @@
   .adminForm{
       width:60%;
       margin:auto;
+      text-align:center;
   }
  
     </style>
@@ -59,8 +57,8 @@
     $username = test_input($_POST["username"]);
     $password = test_input($_POST["password"]);
     $manager = test_input($_POST["manager"]);
-    echo $username;
-    echo $manager;
+    // echo $username;
+    // echo $manager;
 
     }
     function test_input($data)
@@ -84,10 +82,10 @@
     
     //设定登录DN；这是管理员部分
     $ldap_pwd = $password;//设定密码
-    echo('--------------------');
-    echo($ldap_user);
-    echo('--------------------');
-    echo($ldap_pwd);
+    // echo('--------------------');
+    // echo($ldap_user);
+    // echo('--------------------');
+    // echo($ldap_pwd);
     $ldap_conn = ldap_connect($ldap_host, $ldap_port);//建立与 LDAP 服务器的连接
 
     $set = ldap_set_option($ldap_conn, LDAP_OPT_PROTOCOL_VERSION, 3);    //设置参数，这个目前还不了解
@@ -97,7 +95,7 @@
         //诊断连接错误
         die("Can't connect to LDAP server");
     }
-    $r = ldap_bind($ldap_conn, $ldap_user, $ldap_pwd) or die("Can't bind to LDAP server.");//与服务器绑定
+    $r = ldap_bind($ldap_conn, $ldap_user, $ldap_pwd) or die("You are not a uer of Unity-drive.");//与服务器绑定
     /*var_dump($ldap_conn);
     exit;*/
 
@@ -123,19 +121,19 @@
             <form class="form-signin adminForm">
                 <img class="mb-4" src="./yq.png" alt="" width="82" height="72">
                 <h1 class="h3 mb-3 font-weight-normal">您好，'.$username.'</h1>
-                <table class="table">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Username</th>
+                <table class="table" >
+                <thead >
+                  <tr >
+                    <th >User Name</th>
+                    <th style="text-align:center;">Using States</th>
+                    <th style="text-align:center;">Password</th>
+                    <th style="text-align:center;">Polish Btn</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <th scope="row">1</th>
-                    <td>Mark</td>
+                    <td >Mark</td>
                     <td>Otto</td>
                     <td>@mdo</td>
                   </tr>
@@ -153,36 +151,62 @@
                   </tr>
                 </tbody>
               </table>
-                <p class="mt-5 mb-3 text-muted">&copy; 一清创新科技2019</p>
-                </form>';
+              
+                
+                </form>
+                
+                </br>
+                </br>
+                </br>
+                <form class="form-signin adminForm" method ="post"action="addUser.php">
+                        <table class="table" >
+                        <thead >
+                        <tr >
+                            <th >User Name</th>
+                            <th style="text-align:center;">Password</th>
+                            <th style="text-align:center;">Polish Btn</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row"><input type="text" name="polishusername" id="polishusername" class="form-control" placeholder="Username" ></th>                       
+                            <td><input type="text" name="polishusername" id="polishusername" class="form-control" placeholder="password" ></td>
+                            <td><button class="btn btn-sm btn-primary btn-block" type="submit">确认添加该成员</button></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </form>
+              <p class="mt-5 mb-3 text-muted">&copy; 一清创新科技2019</p>
+                
+             
+                
+                
+                ';
             
         }else{
             echo "Welcome $ldap_user";
             echo 'Not a manager';
             echo '
-                <form class="form-signin formClass">
+                <form class="form-signin formClass" action="deal.php"method="post">
                 <img class="mb-4" src="./yq.png" alt="" width="82" height="72">
                 <h1 class="h3 mb-3 font-weight-normal">您好，'.$username.'请修改密码</h1>
                 <label for="Username" class="sr-only">Username</label>   
-                <input type="text" id="username" class="form-control" placeholder="Username" value='.$username.' disabled ></br>
+                <input type="text" name="polishusername" id="polishusername" class="form-control" placeholder="Username" value='.$username.' readonly = "readonly"  ></br>
 
                 <label for="inputPassword" class="sr-only">Password</label>        
-                <input type="password" id="password" class="form-control" placeholder="Password" required></br>
+                <input name="polishpassword" type="polishpassword" id="password" class="form-control" placeholder="Password" required></br>
 
-                <button class="btn btn-lg btn-primary btn-block" type="submit" >确认修改密码</button></br></br>
+                <button class="btn btn-lg btn-primary btn-block" type="submit" id ="polishPwd" >确认修改密码</button></br></br>
                 <p class="mt-5 mb-3 text-muted">&copy; 一清创新科技2019</p>
                 </form>';
         }
-      
+        
     }
+    
     ldap_unbind($ldap_conn) or die("Can't unbind from LDAP server."); //与服务器断开连接
     ?>
 
    
-
-
-    
-
   </body>
 </html>
 
