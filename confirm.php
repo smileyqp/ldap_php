@@ -8,7 +8,7 @@
   -->
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Just test</title>
+    <title>一清创新科技</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <style type="text/css" media="screen">
   * {
@@ -28,6 +28,11 @@
       width:20%;
       margin:auto;
   }
+  .adminForm{
+      width:60%;
+      margin:auto;
+  }
+ 
     </style>
 
   </head>
@@ -114,6 +119,42 @@
         if($manager =='manager'){
             echo "Welcome $ldap_user";
             echo 'you are a manager';
+            echo '
+            <form class="form-signin adminForm">
+                <img class="mb-4" src="./yq.png" alt="" width="82" height="72">
+                <h1 class="h3 mb-3 font-weight-normal">您好，'.$username.'</h1>
+                <table class="table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Username</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                  </tr>
+                </tbody>
+              </table>
+                <p class="mt-5 mb-3 text-muted">&copy; 一清创新科技2019</p>
+                </form>';
             
         }else{
             echo "Welcome $ldap_user";
