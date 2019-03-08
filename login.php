@@ -8,7 +8,7 @@
   -->
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Just test</title>
+    <title>一清创新科技</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <style type="text/css" media="screen">
   * {
@@ -37,7 +37,7 @@
     <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <ul class="nav navbar-nav">
-        <li><a href="login.php">一清密码管理</a></li>
+        <li><a href="login.php">一清创新科技</a></li>
         </ul>
     </div>
     </nav>
@@ -49,8 +49,12 @@
         <input name='username'type="text" id="username" class="form-control" placeholder="Username" required autofocus></br>
         
         <label for="inputPassword" class="sr-only">Password</label>        
-        <input name='password'type="password" id="password" class="form-control" placeholder="Password" required></br>
-        
+        <input name='password'type="password" id="password" class="form-control" placeholder="Password" required>
+        <div class="checkbox mb-3">
+            <label>
+                <input name='manager'type="checkbox" value="manager"> 我是管理员
+            </label>
+        </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit" >Sign in</button></br></br>
         <p class="mt-5 mb-3 text-muted">&copy; 一清创新科技2019</p>
     </form>

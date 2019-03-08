@@ -48,15 +48,16 @@
     // 定义变量并默认设置为空值
     $username = $password = "";
 
+    //接收登录界面传过来的值
     if ($_SERVER["REQUEST_METHOD"] == "POST")
     {
     $username = test_input($_POST["username"]);
     $password = test_input($_POST["password"]);
+    $manager = test_input($_POST["manager"]);
     echo $username;
-    echo $password;
+    echo $manager;
 
     }
-
     function test_input($data)
     {
     $data = trim($data);
@@ -65,22 +66,23 @@
     return $data;
     }
 
-
-    
-    ?>
-
-
-
-
-
-    <?php
+    //LDAP服务器连接部分
     $ldap_host = "localhost";//LDAP 服务器地址
     $ldap_port = "389";//LDAP 服务器端口号
-     
+    if($manager =='manager'){
+        $ldap_user = "cn=".$username.",dc=smileyqp,dc=com";
+    }else{
+        //设定登录DN;这是user部分
+        $ldap_user = "cn=".$username.",ou=users,dc=smileyqp,dc=com";
+    }
     //用户名密码 RDN登录
-    $ldap_user = "cn=admin,dc=smileyqp,dc=com";//设定登录DN
-    $ldap_pwd = "admin";//设定密码
-     
+    
+    //设定登录DN；这是管理员部分
+    $ldap_pwd = $password;//设定密码
+    echo('--------------------');
+    echo($ldap_user);
+    echo('--------------------');
+    echo($ldap_pwd);
     $ldap_conn = ldap_connect($ldap_host, $ldap_port);//建立与 LDAP 服务器的连接
 
     $set = ldap_set_option($ldap_conn, LDAP_OPT_PROTOCOL_VERSION, 3);    //设置参数，这个目前还不了解
