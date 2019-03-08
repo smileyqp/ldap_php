@@ -111,7 +111,28 @@
     }
     else
     {
-      echo "Welcome $ldap_user";
+        if($manager =='manager'){
+            echo "Welcome $ldap_user";
+            echo 'you are a manager';
+            
+        }else{
+            echo "Welcome $ldap_user";
+            echo 'Not a manager';
+            echo '
+                <form class="form-signin formClass">
+                <img class="mb-4" src="./yq.png" alt="" width="82" height="72">
+                <h1 class="h3 mb-3 font-weight-normal">您好，'.$username.'请修改密码</h1>
+                <label for="Username" class="sr-only">Username</label>   
+                <input type="text" id="username" class="form-control" placeholder="Username" value='.$username.' disabled ></br>
+
+                <label for="inputPassword" class="sr-only">Password</label>        
+                <input type="password" id="password" class="form-control" placeholder="Password" required></br>
+
+                <button class="btn btn-lg btn-primary btn-block" type="submit" >确认修改密码</button></br></br>
+                <p class="mt-5 mb-3 text-muted">&copy; 一清创新科技2019</p>
+                </form>';
+        }
+      
     }
     ldap_unbind($ldap_conn) or die("Can't unbind from LDAP server."); //与服务器断开连接
     ?>

@@ -62,7 +62,6 @@
 
 
 
-
     <?php
     $ldap_host = "localhost";//LDAP 服务器地址
     $ldap_port = "389";//LDAP 服务器端口号
