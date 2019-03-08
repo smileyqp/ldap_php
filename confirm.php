@@ -42,18 +42,32 @@
     </div>
     </nav>
     </br></br>
-    <form class="form-signin formClass" method="post"action='confirm.php'>
-        <img class="mb-4" src="./yq.png" alt="" width="82" height="72">
-        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-        <label for="Username" class="sr-only">Username</label>   
-        <input name='username'type="text" id="username" class="form-control" placeholder="Username" required autofocus></br>
-        
-        <label for="inputPassword" class="sr-only">Password</label>        
-        <input name='password'type="password" id="password" class="form-control" placeholder="Password" required></br>
-        
-        <button class="btn btn-lg btn-primary btn-block" type="submit" >Sign in</button></br></br>
-        <p class="mt-5 mb-3 text-muted">&copy; 一清创新科技2019</p>
-    </form>
+    
+
+    <?php
+    // 定义变量并默认设置为空值
+    $username = $password = "";
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST")
+    {
+    $username = test_input($_POST["username"]);
+    $password = test_input($_POST["password"]);
+    echo $username;
+    echo $password;
+
+    }
+
+    function test_input($data)
+    {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+    }
+
+
+    
+    ?>
 
 
 

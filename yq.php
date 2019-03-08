@@ -142,31 +142,32 @@
 
 ?>
 <?php 
-$host= 'localhost';
-$port = '389';//一般都是389
-$domain = 'domain';
-$account = 'myAccount';
+//可以绑定成功的
+// $host= 'localhost';
+// $port = '389';//一般都是389
+// $domain = 'domain';
+// $account = 'myAccount';
  
  
  
-$user = 'cn=admin,dc=smileyqp,dc=com';//域用户名
-$password = 'admin';//域用户密码
+// $user = 'cn=admin,dc=smileyqp,dc=com';//域用户名
+// $password = 'admin';//域用户密码
  
-$conn = ldap_connect($host, $port);//不要写成ldap_connect($host.':'.$port)的形式
-if ($conn) {
-    //设置参数
-    ldap_set_option($conn, LDAP_OPT_PROTOCOL_VERSION, 3);//声明使用版本3
-    ldap_set_option($conn, LDAP_OPT_REFERRALS, 0); // Binding to ldap server
-    $bd = ldap_bind($conn, $user, $password);
-    if ($bd) {
-        echo 'LDAP 绑定成功';//相当于登录成功
-    } else {
-        echo 'LDAP 绑定失败';
-    }
-} else {
-    echo '无法连接到AD域服务器';
-}
-ldap_close($conn);
+// $conn = ldap_connect($host, $port);//不要写成ldap_connect($host.':'.$port)的形式
+// if ($conn) {
+//     //设置参数
+//     ldap_set_option($conn, LDAP_OPT_PROTOCOL_VERSION, 3);//声明使用版本3
+//     ldap_set_option($conn, LDAP_OPT_REFERRALS, 0); // Binding to ldap server
+//     $bd = ldap_bind($conn, $user, $password);
+//     if ($bd) {
+//         echo 'LDAP 绑定成功';//相当于登录成功
+//     } else {
+//         echo 'LDAP 绑定失败';
+//     }
+// } else {
+//     echo '无法连接到AD域服务器';
+// }
+// ldap_close($conn);
 
 ?>
 <?php

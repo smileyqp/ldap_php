@@ -11,12 +11,13 @@
     <title>Just test</title>
     <style type="text/css" media="screen">
   * {
-    margin: 0px 0px 0px 0px;
-    padding: 0px 0px 0px 0px;
+    margin: 0;
+    padding: 0;
   }
 
-  body, html {
-    padding: 3px 3px 3px 3px;
+  body{
+    margin:px;
+    padding:0px;
 
     background-color: #D8DBE2;
 
@@ -31,9 +32,7 @@
   <body>
 
   <?php 
-  $ds=ldap_connect("localhost");
-  ldap_bind($ds,"cn=admin,dc=smileyqp,dc=com","admin");
-  echo($ds)
+  
 
   
   ?>
