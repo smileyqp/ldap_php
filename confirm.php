@@ -5,7 +5,21 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>一清创新科技</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript" language="javascript">
+
+    function changePwd(n) {
+        
+        $.ajax({
+            url:"changePwd.php", 			//the page containing php script
+            type: "POST", 				//request type
+            data:{polishusername:document.getElementById('polishusername').value,polishpassword:document.getElementById('polishpassword').value},
+            success:function(result){
+                alert(result);
+            }
+        });
+    }
+    
 </script>
     <style type="text/css" media="screen">
   * {
@@ -40,7 +54,7 @@
     <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <ul class="nav navbar-nav">
-        <li><a href="login.php">一清密码管理</a></li>
+        <li><a href="login.php">一清创新科技</a></li>
         </ul>
     </div>
     </nav>
@@ -68,6 +82,14 @@
     $data = htmlspecialchars($data);
     return $data;
     }
+
+    //设置cookie
+    
+    setcookie("user",$username, time()+3600);
+    setcookie("password",$password, time()+3600);
+    setcookie('$manager',$$manager,time()+3600);
+    // echo $_COOKIE["username"];
+    // echo $_COOKIE["password"];
 
     //LDAP服务器连接部分
     $ldap_host = "localhost";//LDAP 服务器地址
@@ -115,8 +137,8 @@
     else
     {
         if($manager =='manager'){
-            echo "Welcome $ldap_user";
-            echo 'you are a manager';
+            // echo "Welcome $ldap_user";
+            // echo 'you are a manager';
             echo '
             <form class="form-signin adminForm">
                 <img class="mb-4" src="./yq.png" alt="" width="82" height="72">
@@ -177,26 +199,24 @@
                     </table>
                 </form>
               <p class="mt-5 mb-3 text-muted">&copy; 一清创新科技2019</p>
-                
-             
-                
-                
+  
                 ';
             
         }else{
-            echo "Welcome $ldap_user";
-            echo 'Not a manager';
+            // echo "Welcome $ldap_user";
+            // echo 'Not a manager';
             echo '
-                <form class="form-signin formClass" action="deal.php"method="post">
+                <form class="form-signin formClass" >
                 <img class="mb-4" src="./yq.png" alt="" width="82" height="72">
                 <h1 class="h3 mb-3 font-weight-normal">您好，'.$username.'请修改密码</h1>
+
                 <label for="Username" class="sr-only">Username</label>   
                 <input type="text" name="polishusername" id="polishusername" class="form-control" placeholder="Username" value='.$username.' readonly = "readonly"  ></br>
 
                 <label for="inputPassword" class="sr-only">Password</label>        
-                <input name="polishpassword" type="polishpassword" id="password" class="form-control" placeholder="Password" required></br>
+                <input name="polishpassword" type="polishpassword" id="polishpassword" class="form-control" placeholder="Password" required></br>
 
-                <button class="btn btn-lg btn-primary btn-block" type="submit" id ="polishPwd" >确认修改密码</button></br></br>
+                <button class="btn btn-lg btn-primary btn-block" type="button" id ="polishPwd" onclick="changePwd(this)">确认修改密码</button></br></br>
                 <p class="mt-5 mb-3 text-muted">&copy; 一清创新科技2019</p>
                 </form>';
         }
@@ -205,7 +225,15 @@
     
     ldap_unbind($ldap_conn) or die("Can't unbind from LDAP server."); //与服务器断开连接
     ?>
+<?php 
+function addUser(){
 
+}
+
+
+
+
+?>
    
   </body>
 </html>
