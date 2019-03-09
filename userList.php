@@ -1,12 +1,5 @@
 <?php 
-// $username=$_POST['uername'];
-// $password = $_POST['polishusername'];
 
-$addusername=$_POST['addusername'];
-$addpassword=$_POST['addpassword'];
-
-// echo $addusername;
-// echo $addpassword;
 // echo $_COOKIE["user"];
 // echo $_COOKIE["password"];
 
@@ -43,24 +36,30 @@ if(ldap_errno($ldap_conn)!=0){
 
 
 
-    // //添加用户
-    // $info["cn"] = $addusername;
-    // // $info["password"] = $addpassword;
-    // $info["objectclass"] = "inetOrgPerson";
-    // $r = ldap_add($ldap_conn, "cn=".$addusername.", ou=users, dc=smileyqp,dc=com", $info);
-    // echo $r;
-    // echo 'success';
+    $results=ldap_search( $ldap_conn, "ou=users,dc=smileyqp,dc=com", "cn=*" ); //执行查询
+    $entry= ldap_get_entries($ldap_conn, $results);//获得查询结果
+    //print_r($entry);
+    //echo $entry[0]['cn']['count'];
+    //echo $entry[1][0];
+    // $justthese = array("cn","userpassword"); 
+    // $search = ldap_search($ldap_conn,'ou=users,dc=smileyqp,dc=com',$justthese);
+    // print_r($search);
+    for ($i=0; $i<=count($entry)-2; $i++)
+    {
 
-
-     //添加用户
-    $info["cn"] = $addusername;
-    $info["sn"] = $addusername;
-    $info["userPassword"][0] = "{MD5}".base64_encode(pack("H*",md5($addpassword)));
-    $info["objectclass"] = "inetOrgPerson";
-    $r = ldap_add($ldap_conn, "cn=".$addusername.", ou=users, dc=smileyqp,dc=com", $info);
-    echo '您已经成功添加用户'.$addusername.'！';
-
-
+        echo '
+        <tr>
+        <th scope="row">'.$entry[$i]['cn'][0].'</th>
+            <td><input type="text" name="polishPassword" id="polishPassword" class="form-control pwdInput" placeholder="Password" ></td>
+            <td><button class="btn btn-sm btn-primary btn-block" type="button" >确认修改密码</button></td>
+            <td ><button class="btn btn-sm btn-danger btn-block" type="button" >点击禁用</button></td>
+        </tr> 
+           
+        ';
+   
+    }
+ 
+    
 }
 ldap_unbind($ldap_conn) or die("Can't unbind from LDAP server."); //与服务器断开连接
 

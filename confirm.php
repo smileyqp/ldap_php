@@ -18,9 +18,25 @@
             data:{polishusername:document.getElementById('polishusername').value,polishpassword:document.getElementById('polishpassword').value},
             success:function(result){
                 alert(result);
+                window.history.back(-1);
             }
         });
     }
+
+
+    function adminchangePwd(n) {
+        
+        $.ajax({
+            url:"changePwd.php", 			//the page containing php script
+            type: "POST", 				//request type
+            data:{polishusername:document.getElementById('polishusername').value,polishpassword:document.getElementById('polishpassword').value},
+            success:function(result){
+                alert(result);
+                window.history.back(-1);
+            }
+        });
+    }
+
 
     function addUser(n) {
         
@@ -30,13 +46,26 @@
             data:{addusername:document.getElementById('addusername').value,addpassword:document.getElementById('addpassword').value},
             success:function(result){
                 alert(result);
+                userList(this);
             }
         });
     }
 
+    function userList(n){
+        $.ajax({
+            url:"userList.php", 			//the page containing php script
+            type: "POST", 				//request type
+            data:{},
+            success:function(result){
+                //alert(result);
+                document.getElementById('listIn').innerHTML = result;
+            }
+        });
+    }
 
-
-
+$(document).ready(function(){
+    userList(this);
+})
 
 
     
@@ -64,7 +93,10 @@
       margin:auto;
       text-align:center;
   }
- 
+ .pwdInput{
+     width:60%;
+     margin:auto;
+ }
     </style>
 
   </head>
@@ -156,36 +188,31 @@
             // echo 'you are a manager';
             echo '
             <form class="form-signin adminForm">
-                <img class="mb-4" src="./yq.png" alt="" width="82" height="72">
+                <img class="mb-4" src="./yq.png" alt="" width="82" height="72" onclick="userList(this)">
                 <h1 class="h3 mb-3 font-weight-normal">您好，'.$username.'</h1>
                 <table class="table" >
                 <thead >
                   <tr >
                     <th >User Name</th>
-                    <th style="text-align:center;">Using States</th>
+                   
                     <th style="text-align:center;">Password</th>
                     <th style="text-align:center;">Polish Btn</th>
+                    <th style="text-align:center;">Using States</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
+                <tbody id="listIn">
+                    <tr>
                     <th scope="row">1</th>
-                    <td >Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                  </tr>
+                        <td><input type="text" name="polishPassword" id="polishPassword" class="form-control pwdInput" placeholder="Password" ></td>
+                        <td><button class="btn btn-sm btn-primary btn-block" type="button" onclick="addUser(this)">确认修改密码</button></td>
+                        <td ><button class="btn btn-sm btn-danger btn-block" type="button" >点击禁用</button></td>
+                    </tr> 
+                   
+
+                    
+
+
+
                 </tbody>
               </table>
               
@@ -235,7 +262,7 @@
                 <input type="text" name="polishusername" id="polishusername" class="form-control" placeholder="Username" value='.$username.' readonly = "readonly"  ></br>
 
                 <label for="inputPassword" class="sr-only">Password</label>        
-                <input name="polishpassword" type="polishpassword" id="polishpassword" class="form-control" placeholder="Password" required></br>
+                <input name="polishpassword" type="polishpassword" id="polishpassword" class="form-control" placeholder="Password" required autofocus></br>
 
                 <button class="btn btn-lg btn-primary btn-block" type="button" id ="polishPwd" onclick="changePwd(this)">确认修改密码</button></br></br>
                 <p class="mt-5 mb-3 text-muted">&copy; 一清创新科技2019</p>
