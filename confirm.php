@@ -8,6 +8,8 @@
     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <script type="text/javascript" language="javascript">
 
+
+    //用ajax处理changePwd
     function changePwd(n) {
         
         $.ajax({
@@ -19,6 +21,24 @@
             }
         });
     }
+
+    function addUser(n) {
+        
+        $.ajax({
+            url:"addUser.php", 			//the page containing php script
+            type: "POST", 				//request type
+            data:{addusername:document.getElementById('addusername').value,addpassword:document.getElementById('addpassword').value},
+            success:function(result){
+                alert(result);
+            }
+        });
+    }
+
+
+
+
+
+
     
 </script>
     <style type="text/css" media="screen">
@@ -121,11 +141,6 @@
     /*var_dump($ldap_conn);
     exit;*/
 
-    //添加用户
-    // $info["cn"] = "John";
-    // $info["sn"] = "Jones";
-    // $info["objectclass"] = "person";
-    // $r = ldap_add($ldap_conn, "cn=John, ou=users, dc=smileyqp,dc=com", $info);
     
 
 
@@ -180,7 +195,7 @@
                 </br>
                 </br>
                 </br>
-                <form class="form-signin adminForm" method ="post"action="addUser.php">
+                <form class="form-signin adminForm">
                         <table class="table" >
                         <thead >
                         <tr >
@@ -191,9 +206,15 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <th scope="row"><input type="text" name="polishusername" id="polishusername" class="form-control" placeholder="Username" ></th>                       
-                            <td><input type="text" name="polishusername" id="polishusername" class="form-control" placeholder="password" ></td>
-                            <td><button class="btn btn-sm btn-primary btn-block" type="submit">确认添加该成员</button></td>
+                            <th scope="row">
+                                <input type="text" name="addusername" id="addusername" class="form-control" placeholder="Username" >
+                            </th>                       
+                            <td>    
+                                <input type="text" name="addpassword" id="addpassword" class="form-control" placeholder="password" >
+                            </td>
+                            <td>     
+                                <button class="btn btn-sm btn-primary btn-block" type="button" onclick="addUser(this)">确认添加该成员</button>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
@@ -225,15 +246,7 @@
     
     ldap_unbind($ldap_conn) or die("Can't unbind from LDAP server."); //与服务器断开连接
     ?>
-<?php 
-function addUser(){
 
-}
-
-
-
-
-?>
    
   </body>
 </html>

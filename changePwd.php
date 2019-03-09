@@ -62,13 +62,6 @@ if(ldap_errno($ldap_conn)!=0){
     
 
 
-
-
-
-
-
-
-
 }
 ldap_unbind($ldap_conn) or die("Can't unbind from LDAP server."); //与服务器断开连接
 
