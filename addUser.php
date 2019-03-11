@@ -40,7 +40,33 @@ if(ldap_errno($ldap_conn)!=0){
     echo "Can't log in! ".ldap_error($ldap_conn)."<br>";
 }else{
     
+    $results=ldap_search( $ldap_conn, "ou=users,dc=smileyqp,dc=com", "cn=*" ); //执行查询
+    $entry= ldap_get_entries($ldap_conn, $results);//获得查询结果
+    //print_r($entry);
+    //echo $entry[0]['cn']['count'];
+    //echo $entry[1][0];
+    // $justthese = array("cn","userpassword"); 
+    // $search = ldap_search($ldap_conn,'ou=users,dc=smileyqp,dc=com',$justthese);
+    // print_r($search);
 
+    $userFlag = true;
+    for ($i=0; $i<=count($entry)-2; $i++)
+    {
+        if($entry[$i]['cn'][0]== $addusername){
+            echo '该用户已经注册！';
+            $userFlag = false;
+        }
+   
+    }
+    if($userFlag){
+        //添加用户
+        $info["cn"] = $addusername;
+        $info["sn"] = $addusername;
+        $info["userPassword"][0] = "{MD5}".base64_encode(pack("H*",md5($addpassword)));
+        $info["objectclass"] = "inetOrgPerson";
+        $r = ldap_add($ldap_conn, "cn=".$addusername.", ou=users, dc=smileyqp,dc=com", $info);
+        echo '您已经成功添加用户'.$addusername.'！';
+    }
 
 
     // //添加用户
@@ -52,33 +78,8 @@ if(ldap_errno($ldap_conn)!=0){
     // echo 'success';
 
 
-     //添加用户
-    $info["cn"] = $addusername;
-    $info["sn"] = $addusername;
-    $info["userPassword"][0] = "{MD5}".base64_encode(pack("H*",md5($addpassword)));
-    $info["objectclass"] = "inetOrgPerson";
-    $r = ldap_add($ldap_conn, "cn=".$addusername.", ou=users, dc=smileyqp,dc=com", $info);
-    echo '您已经成功添加用户'.$addusername.'！';
-
-
 }
 ldap_unbind($ldap_conn) or die("Can't unbind from LDAP server."); //与服务器断开连接
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
