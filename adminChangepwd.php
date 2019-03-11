@@ -1,30 +1,17 @@
 <?php 
-// $username=$_POST['uername'];
-// $password = $_POST['polishusername'];
 
-$polishusername=$_POST['polishusername'];
-$polishpassword=$_POST['polishpassword'];
+$listname = $_POST['listname'];
+$listpwd = $_POST['listpwd'];
 
-
-// echo $username;
-// echo $password;
-// echo $polishusername;
-// echo $polishpassword;
-// echo '</br>';
-// echo $_COOKIE["user"];
-// echo $_COOKIE["password"];
 
 
 
 //LDAP服务器连接部分
 $ldap_host = "localhost";//LDAP 服务器地址
 $ldap_port = "389";//LDAP 服务器端口号
-// if($_COOKIE["manager"] =='manager'){
-//     $ldap_user = "cn=".$_COOKIE["user"].",dc=smileyqp,dc=com";
-// }else{
-//     //设定登录DN;这是user部分
-    $ldap_user = "cn=".$_COOKIE["user"].",ou=users,dc=smileyqp,dc=com";
-// }
+
+$ldap_user = "cn=".$_COOKIE["user"].",dc=smileyqp,dc=com";
+
 //用户名密码 RDN登录
 
 //设定登录DN；这是管理员部分
@@ -49,11 +36,13 @@ if(ldap_errno($ldap_conn)!=0){
 }else{
     
 
-    //普通用户修改密码部分
-    $values["userPassword"][0] = "{MD5}".base64_encode(pack("H*",md5($polishpassword)));
-    $rs = ldap_mod_replace($ldap_conn,$ldap_user,$values); 
-    echo '您好'.$_COOKIE["user"].',您的密码修改已经成功！请用新密码登录！';
 
+    $list_user = "cn=".$listname.",ou=users,dc=smileyqp,dc=com";
+    //普通用户修改密码部分
+    $values["userPassword"][0] = "{MD5}".base64_encode(pack("H*",md5($listpwd)));
+    $rs = ldap_mod_replace($ldap_conn,$list_user,$values); 
+    echo '您好'.$_COOKIE["user"].',用户'.$listname.'的密码修改已经成功！';
+ 
 
 
 }

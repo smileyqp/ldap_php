@@ -1,4 +1,3 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -24,15 +23,20 @@
     }
 
 
-    function adminchangePwd(n) {
-        
+    function adminchangePwd(n) {    
+        $num = n.value;
+        //alert($num);
+        $listname = 'username' + $num;
+        $listpwd = 'userpwd'+ $num;
+        // alert(document.getElementById($listname).value);
+        // alert(document.getElementById($listpwd).value);
+               
         $.ajax({
-            url:"changePwd.php", 			//the page containing php script
+            url:"adminChangepwd.php", 			//the page containing php script
             type: "POST", 				//request type
-            data:{polishusername:document.getElementById('polishusername').value,polishpassword:document.getElementById('polishpassword').value},
+            data:{listname:document.getElementById($listname).value,listpwd:document.getElementById($listpwd).value},
             success:function(result){
                 alert(result);
-                window.history.back(-1);
             }
         });
     }
@@ -209,9 +213,6 @@ $(document).ready(function(){
                     </tr> 
                    
 
-                    
-
-
 
                 </tbody>
               </table>
@@ -254,18 +255,18 @@ $(document).ready(function(){
             // echo "Welcome $ldap_user";
             // echo 'Not a manager';
             echo '
-                <form class="form-signin formClass" >
-                <img class="mb-4" src="./yq.png" alt="" width="82" height="72">
-                <h1 class="h3 mb-3 font-weight-normal">您好，'.$username.'请修改密码</h1>
+                <form class="form-signin formClass"  >
+                    <img class="mb-4" src="./yq.png" alt="" width="82" height="72">
+                    <h1 class="h3 mb-3 font-weight-normal">您好，'.$username.'请修改密码</h1>
 
-                <label for="Username" class="sr-only">Username</label>   
-                <input type="text" name="polishusername" id="polishusername" class="form-control" placeholder="Username" value='.$username.' readonly = "readonly"  ></br>
+                    <label for="Username" class="sr-only" >Username</label>   
+                    <input type="text" name="polishusername" id="polishusername" class="form-control" placeholder="Username" value='.$username.' readonly = "readonly"  ></br>
 
-                <label for="inputPassword" class="sr-only">Password</label>        
-                <input name="polishpassword" type="polishpassword" id="polishpassword" class="form-control" placeholder="Password" required autofocus></br>
+                    <label for="inputPassword" class="sr-only">Password</label>        
+                    <input name="polishpassword" type="polishpassword" id="polishpassword" class="form-control" placeholder="Password" required autofocus></br>
 
-                <button class="btn btn-lg btn-primary btn-block" type="button" id ="polishPwd" onclick="changePwd(this)">确认修改密码</button></br></br>
-                <p class="mt-5 mb-3 text-muted">&copy; 一清创新科技2019</p>
+                    <button class="btn btn-lg btn-primary btn-block" type="button" id ="polishPwd" onclick="changePwd(this)">确认修改密码</button></br></br>
+                    <p class="mt-5 mb-3 text-muted">&copy; 一清创新科技2019</p>
                 </form>';
         }
         
