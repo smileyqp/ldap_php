@@ -55,7 +55,7 @@ if(ldap_errno($ldap_conn)!=0){
             <th scope="row" style="width:20%;"><input type="text" id='.$usernameid.'  value='.$entry[$i]['cn'][0].' style="border:none;width:60%;text-align:center;" readonly = "readonly"  ></th>
             <td><input type="text" name="polishPassword" id='.$userpwd.' class="form-control pwdInput" placeholder="Password" ></td>
             <td><button class="btn btn-sm btn-primary btn-block" type="button" value='.$i.' id ='.$userbtn.' onclick="adminchangePwd(this)">确认修改密码</button></td>
-            <td ><button class="btn btn-sm btn-danger btn-block" type="button" id ='.$userlimit.'>点击禁用</button></td>
+            <td ><button class="btn btn-sm btn-danger btn-block" type="button" value='.$i.' id ='.$userlimit.' onclick="limitUser(this)">点击禁用</button></td>
         </tr> 
            
         ';

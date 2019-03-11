@@ -42,6 +42,25 @@
     }
 
 
+    function limitUser(n) {    
+        $num = n.value;
+        $listname = 'username' + $num;
+        $listpwd = 'userpwd'+ $num;
+        // alert(document.getElementById($listname).value);
+        // alert(document.getElementById($listpwd).value);
+               
+        $.ajax({
+            url:"limitUser.php", 			//the page containing php script
+            type: "POST", 				//request type
+            data:{listname:document.getElementById($listname).value,listpwd:document.getElementById($listpwd).value},
+            success:function(result){
+                alert(result);
+                userList(this);
+            }
+        });
+    }
+  
+
     function addUser(n) {
         
         $.ajax({
@@ -66,6 +85,8 @@
             }
         });
     }
+
+
 
 $(document).ready(function(){
     userList(this);
@@ -209,7 +230,7 @@ $(document).ready(function(){
                     <th scope="row">1</th>
                         <td><input type="text" name="polishPassword" id="polishPassword" class="form-control pwdInput" placeholder="Password" ></td>
                         <td><button class="btn btn-sm btn-primary btn-block" type="button" onclick="addUser(this)">确认修改密码</button></td>
-                        <td ><button class="btn btn-sm btn-danger btn-block" type="button" >点击禁用</button></td>
+                        <td ><button  class="btn btn-sm btn-danger btn-block" type="button" onclick="limitUser(this)">点击禁用</button></td>
                     </tr> 
                    
 
