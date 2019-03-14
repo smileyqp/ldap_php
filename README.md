@@ -1,4 +1,10 @@
-###  php连接ldap简化版
+## php连接ldap简化版
+
+![Image text](https://github.com/smileyqp/ldap_php/blob/master/README_PIC/1.png)
+
+![Image text](https://github.com/smileyqp/ldap_php/blob/master/README_PIC/2.png)
+
+![Image text](https://github.com/smileyqp/ldap_php/blob/master/README_PIC/3.png)
 
 ```shell
 sudo apt-get update
@@ -7,14 +13,14 @@ sudo dpkg-reconfigure slapd
 ```
 
 在这个过程中有很多新的问题需要回答。 我们将接受大部分违约。 我们来回答一下问题：</br>
-省略了OpenLDAP服务器配置？ 没有</br>
-DNS域名？此选项将确定目录路径的基本结构。 阅读消息以了解这将如何实现。 即使您不拥有实际的网域，您也可以选择所需的任何值。 但是，假设您具有适当的服务器域名，因此您应该使用它。 我将使用smileyqp.com 。 </br>
-机构名称？你可以选择任何你觉得合适的东西。 </br>
-管理员密码？ 输入两次安全密码</br>
-数据库后端？ MDB</br>
-清除slapd时删除数据库？ 没有</br>
-移动旧数据库？ 是</br>
-允许LDAPv2协议？ 没有 </br>
+* 省略了OpenLDAP服务器配置？ 没有</br>
+* DNS域名？此选项将确定目录路径的基本结构。 阅读消息以了解这将如何实现。 即使您不拥有实际的网域，您也可以选择所需的任何值。 但是，假设您具有适当的服务器域名，因此您应该使用它。 我将使用smileyqp.com 。 </br>
+* 机构名称？你可以选择任何你觉得合适的东西。 </br>
+* 管理员密码？ 输入两次安全密码</br>
+* 数据库后端？ MDB</br>
+* 清除slapd时删除数据库？ 没有</br>
+* 移动旧数据库？ 是</br>
+* 允许LDAPv2协议？ 没有 </br>
 </br>
 此时，您的LDAP服务器已配置并运行。 打开防火墙上的LDAP端口，以便外部客户端可以连接：</br>
 
@@ -89,8 +95,3 @@ http://localhost/phpldapadmin/</br>
 或者有一个方法是我直接将其一行存储起来要用的时候直接从存储的地方进行抽取；
 另外一个方法是，将这个打上tag比如id等进行编号，然后再获取
 
-![Image text](https://github.com/smileyqp/ldap_php/blob/master/README_PIC/1.png)
-
-![Image text](https://github.com/smileyqp/ldap_php/blob/master/README_PIC/2.png)
-
-![Image text](https://github.com/smileyqp/ldap_php/blob/master/README_PIC/3.png)
