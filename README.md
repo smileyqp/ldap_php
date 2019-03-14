@@ -6,6 +6,8 @@
 
 ![Image text](https://github.com/smileyqp/ldap_php/blob/master/README_PIC/3.png)
 
+## ubuntu上openldap安装以及phpLdapAdmin安装基本步骤
+
 ```shell
 sudo apt-get update
 sudo apt-get install slapd ldap-utils
